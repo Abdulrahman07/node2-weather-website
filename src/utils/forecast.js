@@ -1,7 +1,7 @@
 const request = require('request')
 
 const forecast = (lon, lat, callback) => {
-    const url = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ encodeURIComponent(lat) + '&lon='+ encodeURIComponent(lon) + '&appid=f8271bd5ed602123c0a2ab3d83dde3e1'
+    const url = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ encodeURIComponent(lat) + '&lon='+ encodeURIComponent(lon) + '&appid=f8271bd5ed602123c0a2ab3d83dde3e1&units=metric'
     request({url, json: true}, (error, {body}) => {
         if(error){
             callback('Unable to connect weather service!', undefined,)
