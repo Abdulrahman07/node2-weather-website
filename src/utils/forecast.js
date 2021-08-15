@@ -1,7 +1,7 @@
 const request = require('request')
 
 const forecast = (lon, lat, callback) => {
-    const url = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ encodeURIComponent(lat) + '&lon='+ encodeURIComponent(lon) + '&appid=f8271bd5ed602123c0a2ab3d83dde3e1&units=metric'
+    const url = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ encodeURIComponent(lat) + '&lon='+ encodeURIComponent(lon) + '&appid=f8271bd5ed602123c0a2ab3d83dde3e1&units=metric&exclude=minutely,hourly'
     request({url, json: true}, (error, {body}) => {
         if(error){
             callback('Unable to connect weather service!', undefined,)
@@ -14,7 +14,7 @@ const forecast = (lon, lat, callback) => {
                 callback('Unable to find location', undefined)
             }
         } else {
-            callback(undefined, body.daily[0].weather[0].description + ' It\'s currently '+ body.current.temp + ' degrees out. The main weather will be ' + body.current.weather[0].main)
+            callback(undefined, body.daily[0].weather[0].description + ' It\'s currently: '+ body.current.temp +  ' degrees out.' + ' Maximum temperature: ' + body.daily[0].temp.max + ' degrees out.' +'  Minimum temperature: ' + body.daily[0].temp.min + ' degrees out. The main weather will be ' + body.current.weather[0].main)
         }
     })
 }
